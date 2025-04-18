@@ -24,16 +24,31 @@ nix develop github:castrozan/codex-flake
 
 ### As a Flake Input
 
-Add to your `flake.nix`:
+Add `codex-flake` to your flake inputs and reference its package in your outputs:
 
 ```nix
 {
-  inputs.codex-flake.url = "github:castrozan/codex-flake";
-  
-  # Use in your outputs...
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
+    codex-flake = {
+      url = "github:castrozan/codex-flake";
+      inputs.flake-utils.follows = "flake-utils";
+    };
+  };
 }
 ```
 
+For NixOS system configurations, you can add `codex` to `environment.systemPackages`. For example, in a separate `configuration.nix`:
+
+```nix
+{ pkgs, inputs, ... }:
+{
+  environment.systemPackages = [
+    inputs.codex-flake.packages.${pkgs.system}.default
+  ];
+}
+```
 ## License
 
 The build scripts in this repository are dual-licensed under the terms of the MIT license and the Apache License (Version 2.0).
