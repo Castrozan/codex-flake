@@ -18,18 +18,18 @@
         pkgs = import nixpkgs { inherit system; };
         codex-cli = pkgs.buildNpmPackage rec {
           pname = "codex-cli";
-          version = "unstable-2025-04-18";
+          version = "unstable-2025-04-30";
 
           src = pkgs.fetchFromGitHub {
             owner = "openai";
             repo = "codex";
             rev = "59a180ddec4adaf9760972cdb1eb89f06a81be8b";
-            sha256 = "sha256-QHeap2nV0d4+jAHXtVGqX2XemtQIaFDCjU0mlUn6PrI=";
+            sha256 = "sha256-DEUrtIn7jWiLnym2KZULz8IQ+m7eP+4s6OdqEKrsoEA=";
           };
 
           sourceRoot = "${src.name}/codex-cli";
 
-          npmDepsHash = "sha256-XMDGNdAEh0e0hSCgObsV8haZCRYJ8bS2PzIT+yes6GQ=";
+          npmDepsHash = "sha256-YeFvrHURa8VTaIt99sQjUt/mOMiFyMVynfvuKbOoIJY=";
 
           npmBuildScript = "build";
           npmFlags = "--include=dev";
